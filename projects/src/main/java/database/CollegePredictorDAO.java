@@ -105,5 +105,6 @@ public class CollegePredictorDAO {
         Student existingStudent = new Student(getName, phone, email, rank);
         System.out.println("The student information with name " + name);
         System.out.println(existingStudent);
+
     }
 }
