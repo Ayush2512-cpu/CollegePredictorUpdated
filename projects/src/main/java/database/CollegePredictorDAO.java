@@ -79,7 +79,9 @@ public class CollegePredictorDAO {
                             "name", student.name,
                             "rank", student.rank)
                     .withString("email", student.email)
-                    .with("phone", student.phone);
+                    .with("phone", student.phone)
+                    .withString("exam name",student.exam)
+                    .withString("category", student.category);
 
             PutItemOutcome outcome = table.putItem(item);
 
@@ -101,8 +103,11 @@ public class CollegePredictorDAO {
         String email = item.getString("email");
         String phone = item.getString("phone");
         int rank = item.getInt("rank");
+        String exam = item.getString("exam name");
+        String category = item.getString("category");
 
-        Student existingStudent = new Student(getName, phone, email, rank);
+
+        Student existingStudent = new Student(getName, phone, email, rank, exam,category);
         System.out.println("The student information with name " + name);
         System.out.println(existingStudent);
 

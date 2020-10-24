@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-public class MySQLAccess {
+public class TryMySQL {
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
@@ -30,33 +30,30 @@ public class MySQLAccess {
                     .executeQuery("select * from student.student");
             writeResultSet(resultSet);
 
-//            // PreparedStatements can use variables and are more efficient
-//            preparedStatement = connect
-//                    .prepareStatement("insert into  student.student values (default, ?, ?, ?, ? , ?, ?)");
-//            // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
-//            // Parameters start with 1
-//            preparedStatement.setString(1, "Test");
-//            preparedStatement.setString(2, "TestEmail");
-//            preparedStatement.setString(3, "TestWebpage");
-//            preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
-//            preparedStatement.setString(5, "TestSummary");
-//            preparedStatement.setString(6, "TestComment");
-//            preparedStatement.executeUpdate();
+            // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect
+                    .prepareStatement("insert into  student.student values (?,?,?)");
+            // Parameters start with 1
+            preparedStatement.setString(1, "7");
+            preparedStatement.setString(2, "Tony");
+            preparedStatement.setString(3, "Computer");
+           preparedStatement.executeUpdate();
 //
 //            preparedStatement = connect
-//                    .prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS from feedback.comments");
+//                    .prepareStatement("SELECT college,state,nrif rank,fees, COMMENTS from student.student");
 //            resultSet = preparedStatement.executeQuery();
 //            writeResultSet(resultSet);
 //
 //            // Remove again the insert comment
 //            preparedStatement = connect
-//                    .prepareStatement("delete from feedback.comments where myuser= ? ; ");
+//                    .prepareStatement("delete from student.student where myuser= ? ; ");
 //            preparedStatement.setString(1, "Test");
 //            preparedStatement.executeUpdate();
-
+            //writeResultSet(resultSet);
             resultSet = statement
                     .executeQuery("select * from student.student");
-            writeMetaData(resultSet);
+            writeResultSet(resultSet);
+            //writeMetaData(resultSet);
 
         } catch (Exception e) {
             throw e;
@@ -84,7 +81,6 @@ public class MySQLAccess {
             // It is possible to get the columns via name
             // also possible to get the columns via the column number
             // which starts at 1
-            // e.g. resultSet.getSTring(2);
             String student_id = resultSet.getString("student_id");
             String name = resultSet.getString("name");
             String major = resultSet.getString("major");
